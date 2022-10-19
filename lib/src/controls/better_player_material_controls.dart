@@ -282,18 +282,18 @@ class _BetterPlayerMaterialControlsState
       duration: _controlsConfiguration.controlsHideTime,
       onEnd: _onPlayerHide,
       child: Container(
-        height: _controlsConfiguration.controlBarHeight + 20.0,
+        height: _controlsConfiguration.controlBarHeight + 10,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Expanded(
               flex: 75,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  if (_controlsConfiguration.enablePlayPause)
-                    _buildPlayPause(_controller!)
-                  else
-                    const SizedBox(),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  ),
                   if (_betterPlayerController!.isLiveStream())
                     _buildLiveWidget()
                   else
@@ -301,6 +301,8 @@ class _BetterPlayerMaterialControlsState
                         ? Expanded(child: _buildPosition())
                         : const SizedBox(),
                   const Spacer(),
+                  if (_controlsConfiguration.enableMute)
+                    _buildPositionReaming(),
                   if (_controlsConfiguration.enableMute)
                     _buildMuteButton(_controller)
                   else
@@ -534,7 +536,7 @@ class _BetterPlayerMaterialControlsState
         child: ClipRect(
           child: Container(
             height: _controlsConfiguration.controlBarHeight,
-            padding: const EdgeInsets.symmetric(horizontal: 8),
+            padding: const EdgeInsets.only(right: 12.0),
             child: Icon(
               (_latestValue != null && _latestValue!.volume > 0)
                   ? _controlsConfiguration.muteIcon
@@ -576,24 +578,29 @@ class _BetterPlayerMaterialControlsState
       padding: _controlsConfiguration.enablePlayPause
           ? const EdgeInsets.only(right: 24)
           : const EdgeInsets.symmetric(horizontal: 22),
-      child: RichText(
-        text: TextSpan(
-            text: BetterPlayerUtils.formatDuration(position),
-            style: TextStyle(
-              fontSize: 10.0,
-              color: _controlsConfiguration.textColor,
-              decoration: TextDecoration.none,
-            ),
-            children: <TextSpan>[
-              TextSpan(
-                text: ' / ${BetterPlayerUtils.formatDuration(duration)}',
-                style: TextStyle(
-                  fontSize: 10.0,
-                  color: _controlsConfiguration.textColor,
-                  decoration: TextDecoration.none,
-                ),
-              )
-            ]),
+      child: Text(
+        BetterPlayerUtils.formatDuration(position),
+        style: TextStyle(
+          color: _controlsConfiguration.textColor,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPositionReaming() {
+    final position =
+        _latestValue != null ? _latestValue!.position : Duration.zero;
+    final duration = _latestValue != null && _latestValue!.duration != null
+        ? _latestValue!.duration!
+        : Duration.zero;
+
+    return Padding(
+      padding: const EdgeInsets.only(right: 5.0),
+      child: Text(
+        '-${BetterPlayerUtils.formatDuration(duration - position)}',
+        style: TextStyle(
+          color: _controlsConfiguration.textColor,
+        ),
       ),
     );
   }
@@ -700,24 +707,27 @@ class _BetterPlayerMaterialControlsState
       child: Container(
         alignment: Alignment.bottomCenter,
         padding: const EdgeInsets.symmetric(horizontal: 12),
-        child: BetterPlayerMaterialVideoProgressBar(
-          _controller,
-          _betterPlayerController,
-          onDragStart: () {
-            _hideTimer?.cancel();
-          },
-          onDragEnd: () {
-            _startHideTimer();
-          },
-          onTapDown: () {
-            cancelAndRestartTimer();
-          },
-          colors: BetterPlayerProgressColors(
-              playedColor: _controlsConfiguration.progressBarPlayedColor,
-              handleColor: _controlsConfiguration.progressBarHandleColor,
-              bufferedColor: _controlsConfiguration.progressBarBufferedColor,
-              backgroundColor:
-                  _controlsConfiguration.progressBarBackgroundColor),
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 20.0),
+          child: BetterPlayerMaterialVideoProgressBar(
+            _controller,
+            _betterPlayerController,
+            onDragStart: () {
+              _hideTimer?.cancel();
+            },
+            onDragEnd: () {
+              _startHideTimer();
+            },
+            onTapDown: () {
+              cancelAndRestartTimer();
+            },
+            colors: BetterPlayerProgressColors(
+                playedColor: _controlsConfiguration.progressBarPlayedColor,
+                handleColor: _controlsConfiguration.progressBarHandleColor,
+                bufferedColor: _controlsConfiguration.progressBarBufferedColor,
+                backgroundColor:
+                    _controlsConfiguration.progressBarBackgroundColor),
+          ),
         ),
       ),
     );

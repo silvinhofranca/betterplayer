@@ -24,6 +24,9 @@ class _NormalPlayerPageState extends State<NormalPlayerPage> {
         DeviceOrientation.portraitDown,
         DeviceOrientation.portraitUp
       ],
+      controlsConfiguration: BetterPlayerControlsConfiguration(
+        enableFullscreen: false,
+      ),
     );
     _betterPlayerDataSource = BetterPlayerDataSource(
       BetterPlayerDataSourceType.network,
