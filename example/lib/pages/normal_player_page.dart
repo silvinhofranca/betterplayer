@@ -26,6 +26,8 @@ class _NormalPlayerPageState extends State<NormalPlayerPage> {
       ],
       controlsConfiguration: BetterPlayerControlsConfiguration(
         enableFullscreen: false,
+        title: 'Suporte',
+        subtitle: 'Max hehe',
       ),
     );
     _betterPlayerDataSource = BetterPlayerDataSource(

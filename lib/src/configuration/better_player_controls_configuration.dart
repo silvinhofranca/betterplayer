@@ -161,6 +161,13 @@ class BetterPlayerControlsConfiguration {
   ///Color of text in bottom modal sheet used for overflow menu items.
   final Color overflowModalTextColor;
 
+  final String title;
+  /// Added a title on video or stream.
+
+  final String subtitle;
+  /// Added a subtitle on video or stream.
+
+
   const BetterPlayerControlsConfiguration({
     this.controlBarColor = Colors.black87,
     this.textColor = Colors.white,
@@ -213,6 +220,8 @@ class BetterPlayerControlsConfiguration {
     this.backgroundColor = Colors.black,
     this.overflowModalColor = Colors.white,
     this.overflowModalTextColor = Colors.black,
+    this.title = 'Custom Title',
+    this.subtitle = 'Custom Subtitle'
   });
 
   factory BetterPlayerControlsConfiguration.white() {

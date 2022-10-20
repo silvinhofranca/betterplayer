@@ -186,7 +186,7 @@ class _BetterPlayerMaterialControlsState
     if (!betterPlayerController!.controlsEnabled) {
       return const SizedBox();
     }
-
+    //Get Title and subtitle, more onTap
     return Container(
       child: (_controlsConfiguration.enableOverflowMenu)
           ? AnimatedOpacity(
@@ -218,14 +218,14 @@ class _BetterPlayerMaterialControlsState
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
-                                  'T1 | E01 - Piloto',
+                                  betterPlayerControlsConfiguration.title,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                   ),
                                 ),
                                 Text(
-                                  'Stream video',
+                                  betterPlayerControlsConfiguration.subtitle,
                                   style: TextStyle(
                                     fontSize: 11,
                                     color: Colors.white,
