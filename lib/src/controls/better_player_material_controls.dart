@@ -197,8 +197,46 @@ class _BetterPlayerMaterialControlsState
                 height: _controlsConfiguration.controlBarHeight,
                 width: double.infinity,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5.0),
+                      child: BetterPlayerMaterialClickableWidget(
+                        onTap: () {},
+                        borderRadius: BorderRadius.zero,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.arrow_back_ios_new_rounded,
+                              color: Colors.white,
+                            ),
+                            const SizedBox(
+                              width: 10.0,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'T1 | E01 - Piloto',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Text(
+                                  'Stream video',
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
                     if (_controlsConfiguration.enablePip)
                       _buildPipButtonWrapperWidget(
                           controlsNotVisible, _onPlayerHide)
@@ -383,15 +421,15 @@ class _BetterPlayerMaterialControlsState
       child: _betterPlayerController?.isLiveStream() == true
           ? const SizedBox()
           : Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (_controlsConfiguration.enableSkips)
-                  Expanded(child: _buildSkipButton())
+                  _buildSkipButton()
                 else
                   const SizedBox(),
-                Expanded(child: _buildReplayButton(_controller!)),
+                _buildReplayButton(_controller!),
                 if (_controlsConfiguration.enableSkips)
-                  Expanded(child: _buildForwardButton())
+                  _buildForwardButton()
                 else
                   const SizedBox(),
               ],
@@ -412,7 +450,7 @@ class _BetterPlayerMaterialControlsState
               borderRadius: BorderRadius.circular(48),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8.0),
               child: Stack(
                 children: [icon!],
               ),
@@ -427,7 +465,7 @@ class _BetterPlayerMaterialControlsState
     return _buildHitAreaClickableButton(
       icon: Icon(
         _controlsConfiguration.skipBackIcon,
-        size: 24,
+        size: 30,
         color: _controlsConfiguration.iconsColor,
       ),
       onClicked: skipBack,
@@ -438,7 +476,7 @@ class _BetterPlayerMaterialControlsState
     return _buildHitAreaClickableButton(
       icon: Icon(
         _controlsConfiguration.skipForwardIcon,
-        size: 24,
+        size: 30,
         color: _controlsConfiguration.iconsColor,
       ),
       onClicked: skipForward,
@@ -451,14 +489,14 @@ class _BetterPlayerMaterialControlsState
       icon: isFinished
           ? Icon(
               Icons.replay,
-              size: 42,
+              size: 58,
               color: _controlsConfiguration.iconsColor,
             )
           : Icon(
               controller.value.isPlaying
                   ? _controlsConfiguration.pauseIcon
                   : _controlsConfiguration.playIcon,
-              size: 42,
+              size: 58,
               color: _controlsConfiguration.iconsColor,
             ),
       onClicked: () {
