@@ -28,6 +28,9 @@ class _NormalPlayerPageState extends State<NormalPlayerPage> {
         enableFullscreen: false,
         title: 'Suporte',
         subtitle: 'Max hehe',
+        onPressed: () {
+          Navigator.pop(context);
+        },
       ),
     );
     _betterPlayerDataSource = BetterPlayerDataSource(

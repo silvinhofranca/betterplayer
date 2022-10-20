@@ -202,38 +202,44 @@ class _BetterPlayerMaterialControlsState
                     Padding(
                       padding: const EdgeInsets.only(left: 5.0),
                       child: BetterPlayerMaterialClickableWidget(
-                        onTap: () {},
-                        borderRadius: BorderRadius.zero,
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.arrow_back_ios_new_rounded,
-                              color: Colors.white,
-                            ),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  betterPlayerControlsConfiguration.title,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
+                        onTap:
+                            betterPlayerControlsConfiguration.onPressed == null
+                                ? () {}
+                                : betterPlayerControlsConfiguration.onPressed!,
+                        borderRadius: BorderRadius.circular(20.0),
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 10.0),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.arrow_back_ios_new_rounded,
+                                color: Colors.white,
+                              ),
+                              const SizedBox(
+                                width: 10.0,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    betterPlayerControlsConfiguration.title,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  betterPlayerControlsConfiguration.subtitle,
-                                  style: TextStyle(
-                                    fontSize: 11,
-                                    color: Colors.white,
+                                  Text(
+                                    betterPlayerControlsConfiguration.subtitle,
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            )
-                          ],
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
