@@ -326,7 +326,7 @@ class _BetterPlayerMaterialControlsState
       duration: _controlsConfiguration.controlsHideTime,
       onEnd: _onPlayerHide,
       child: Container(
-        height: _controlsConfiguration.controlBarHeight + 10,
+        height: _controlsConfiguration.controlBarHeight + 20.0,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -625,6 +625,7 @@ class _BetterPlayerMaterialControlsState
       child: Text(
         BetterPlayerUtils.formatDuration(position),
         style: TextStyle(
+          fontSize: 10,
           color: _controlsConfiguration.textColor,
         ),
       ),
@@ -643,6 +644,7 @@ class _BetterPlayerMaterialControlsState
       child: Text(
         '-${BetterPlayerUtils.formatDuration(duration - position)}',
         style: TextStyle(
+          fontSize: 10,
           color: _controlsConfiguration.textColor,
         ),
       ),
